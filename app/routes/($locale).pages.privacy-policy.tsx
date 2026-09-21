@@ -77,7 +77,7 @@ export default function PrivacyPolicyPage() {
             <li>Opt-out of marketing communications</li>
             <li>Data portability</li>
           </ul>
-          <p>To exercise these rights, contact us at hello@evol.com.</p>
+          <p>To exercise these rights, contact us at evolmedia.ceo@gmail.com.</p>
         </section>
 
         <section className="legal-section">
@@ -98,7 +98,7 @@ export default function PrivacyPolicyPage() {
         <section className="legal-section">
           <h2>10. Contact Us</h2>
           <p>If you have questions about this Privacy Policy, please contact us at:</p>
-          <p><strong>Email:</strong> hello@evol.com</p>
+          <p><strong>Email:</strong> evolmedia.ceo@gmail.com</p>
           <p><strong>Location:</strong> Dubai, United Arab Emirates</p>
         </section>
       </div>

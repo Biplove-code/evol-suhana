@@ -79,7 +79,7 @@ export default function TermsOfServicePage() {
         <section className="legal-section">
           <h2>12. Contact Information</h2>
           <p>If you have any questions about these Terms, please contact us at:</p>
-          <p><strong>Email:</strong> hello@evol.com</p>
+          <p><strong>Email:</strong> evolmedia.ceo@gmail.com</p>
           <p><strong>Location:</strong> Dubai, United Arab Emirates</p>
         </section>
       </div>

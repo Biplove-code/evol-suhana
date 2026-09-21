@@ -55,7 +55,7 @@ export default function ReturnsPage() {
               <div className="step-number">1</div>
               <div className="step-content">
                 <h3>Contact Us</h3>
-                <p>Email us at hello@evol.com with your order number and reason for return.</p>
+                <p>Email us at evolmedia.ceo@gmail.com with your order number and reason for return.</p>
               </div>
             </div>
             <div className="step">

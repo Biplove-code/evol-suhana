@@ -158,17 +158,17 @@ function MobileMenuAside({
   header: PageLayoutProps['header'];
   publicStoreDomain: PageLayoutProps['publicStoreDomain'];
 }) {
+  const primaryDomainUrl = header.shop.primaryDomain?.url;
+  if (!primaryDomainUrl) return null;
+
   return (
-    header.menu &&
-    header.shop.primaryDomain?.url && (
-      <Aside type="mobile" heading="MENU">
-        <HeaderMenu
-          menu={header.menu}
-          viewport="mobile"
-          primaryDomainUrl={header.shop.primaryDomain.url}
-          publicStoreDomain={publicStoreDomain}
-        />
-      </Aside>
-    )
+    <Aside type="mobile" heading="MENU">
+      <HeaderMenu
+        menu={header.menu}
+        viewport="mobile"
+        primaryDomainUrl={primaryDomainUrl}
+        publicStoreDomain={publicStoreDomain}
+      />
+    </Aside>
   );
 }

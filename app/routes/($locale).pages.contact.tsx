@@ -28,7 +28,7 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <h3>Email</h3>
-                  <p><a href="mailto:hello@evol.com">hello@evol.com</a></p>
+                  <p><a href="mailto:evolmedia.ceo@gmail.com">evolmedia.ceo@gmail.com</a></p>
                   <p className="contact-note">We respond within 24 hours</p>
                 </div>
               </div>

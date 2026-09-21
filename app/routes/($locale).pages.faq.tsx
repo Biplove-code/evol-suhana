@@ -42,7 +42,7 @@ export default function FAQPage() {
         },
         {
           q: 'How do I initiate a return?',
-          a: 'Contact us at hello@evol.com with your order number and reason for return. We\'ll provide you with a return label and instructions.',
+          a: 'Contact us at evolmedia.ceo@gmail.com with your order number and reason for return. We\'ll provide you with a return label and instructions.',
         },
         {
           q: 'How long do refunds take?',

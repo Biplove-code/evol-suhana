@@ -125,6 +125,32 @@ const PRODUCT_ITEM_FRAGMENT = `#graphql
         ...MoneyProductItem
       }
     }
+    selectedOrFirstAvailableVariant {
+      id
+      availableForSale
+      price {
+        ...MoneyProductItem
+      }
+      compareAtPrice {
+        ...MoneyProductItem
+      }
+      image {
+        id
+        url
+        altText
+        width
+        height
+      }
+      product {
+        title
+        handle
+      }
+      selectedOptions {
+        name
+        value
+      }
+      title
+    }
   }
 ` as const;
 

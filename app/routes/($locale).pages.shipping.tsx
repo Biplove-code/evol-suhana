@@ -84,7 +84,7 @@ export default function ShippingPage() {
 
           <section className="shipping-section">
             <h2>Delivery Issues</h2>
-            <p>If you experience any issues with your delivery, please contact us at hello@evol.com and we will assist you promptly.</p>
+            <p>If you experience any issues with your delivery, please contact us at evolmedia.ceo@gmail.com and we will assist you promptly.</p>
           </section>
         </div>
       </div>

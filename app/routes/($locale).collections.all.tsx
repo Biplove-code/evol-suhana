@@ -6,7 +6,7 @@ import {ProductItem} from '~/components/ProductItem';
 import type {CollectionItemFragment} from 'storefrontapi.generated';
 
 export const meta: Route.MetaFunction = () => {
-  return [{title: `Hydrogen | Products`}];
+  return [{title: `All Products | EVOL`}];
 };
 
 export async function loader(args: Route.LoaderArgs) {
@@ -92,6 +92,32 @@ const COLLECTION_ITEM_FRAGMENT = `#graphql
       maxVariantPrice {
         ...MoneyCollectionItem
       }
+    }
+    selectedOrFirstAvailableVariant {
+      id
+      availableForSale
+      price {
+        ...MoneyCollectionItem
+      }
+      compareAtPrice {
+        ...MoneyCollectionItem
+      }
+      image {
+        id
+        url
+        altText
+        width
+        height
+      }
+      product {
+        title
+        handle
+      }
+      selectedOptions {
+        name
+        value
+      }
+      title
     }
   }
 ` as const;

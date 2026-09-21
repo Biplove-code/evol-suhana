@@ -5,39 +5,48 @@ import {Image, Money} from '@shopify/hydrogen';
 import type {
   FeaturedCollectionFragment,
   FeaturedProductsQuery,
-  HomepageProductFragment,
 } from 'storefrontapi.generated';
 import {useVariantUrl} from '~/lib/variants';
 import {MockShopNotice} from '~/components/MockShopNotice';
+import {AddToCartButton} from '~/components/AddToCartButton';
+import {useAside} from '~/components/Aside';
+
+type HomepageProduct = FeaturedProductsQuery['products']['nodes'][number] & {
+  selectedOrFirstAvailableVariant?: {
+    id: string;
+    availableForSale: boolean;
+    price: {amount: string; currencyCode: string};
+    compareAtPrice?: {amount: string; currencyCode: string} | null;
+    image?: {
+      id?: string | null;
+      url: string;
+      altText?: string | null;
+      width?: number | null;
+      height?: number | null;
+    } | null;
+    product: {title: string; handle: string};
+    selectedOptions: Array<{name: string; value: string}>;
+    title?: string | null;
+  } | null;
+};
 
 export const meta: Route.MetaFunction = () => {
   return [{title: 'EVOL | Modern Lifestyle, Wellness & Everyday Essentials'}];
 };
 
 export async function loader(args: Route.LoaderArgs) {
-  // Start fetching non-critical data without blocking time to first byte
   const deferredData = loadDeferredData(args);
-
-  // Await the critical data required to render initial state of the page
   const criticalData = await loadCriticalData(args);
-
   return {...deferredData, ...criticalData};
 }
 
-/**
- * Load data necessary for rendering content above the fold. This is the critical data
- * needed to render the page. If it's unavailable, the whole page should 400 or 500 error.
- */
 async function loadCriticalData({context}: Route.LoaderArgs) {
   const [{collections}] = await Promise.all([
     context.storefront.query(FEATURED_COLLECTION_QUERY),
-    // Add other queries here, so that they are loaded in parallel
   ]);
 
   return {
     isShopLinked: Boolean(context.env.PUBLIC_STORE_DOMAIN),
-    // Prefer the most recently updated collection that actually has an image,
-    // so the hero always has a background to show.
     featuredCollection:
       collections.nodes.find(
         (collection: FeaturedCollectionFragment) => collection.image,
@@ -45,16 +54,10 @@ async function loadCriticalData({context}: Route.LoaderArgs) {
   };
 }
 
-/**
- * Load data for rendering content below the fold. This data is deferred and will be
- * fetched after the initial page load. If it's unavailable, the page should still 200.
- * Make sure to not throw any errors here, as it will cause the page to 500.
- */
 function loadDeferredData({context}: Route.LoaderArgs) {
   const featuredProducts = context.storefront
     .query(FEATURED_PRODUCTS_QUERY)
     .catch((error: Error) => {
-      // Log query errors, but don't throw them so the page can still render
       console.error(error);
       return null;
     });
@@ -69,7 +72,7 @@ export default function Homepage() {
   return (
     <div className="home">
       {data.isShopLinked ? null : <MockShopNotice />}
-            <Hero collection={data.featuredCollection} />
+      <Hero collection={data.featuredCollection} />
       <ProductGrid products={data.featuredProducts} />
       <BrandStory />
     </div>
@@ -86,58 +89,26 @@ function Hero({collection}: {collection: FeaturedCollectionFragment}) {
             className="hero-bg"
             data={image}
             sizes="100vw"
-            alt={image.altText || 'Evol Suhana'}
+            alt={image.altText || 'EVOL'}
           />
         ) : null}
-        {/* Drop your own banner at public/hero-banner.jpg and it will be used here */}
         <div className="hero-bg hero-bg-photo" aria-hidden="true" />
         <div className="hero-overlay" />
         <div className="hero-content">
-          <h1 id="hero-heading">Evol BY Suhana</h1>
+          <p className="hero-eyebrow">EVOL</p>
+          <h1 id="hero-heading">Lifestyle that evolves with you</h1>
           <p className="hero-tagline">
-            Curated lifestyle, wellness & everyday essentials — thoughtfully
-            chosen for modern living.
+            Curated wellness & everyday essentials — thoughtfully chosen for
+            modern living.
           </p>
           <div className="hero-ctas">
             <Link className="btn btn-primary" to="/collections/all">
               Shop Bestsellers
             </Link>
+            <Link className="btn btn-outline" to="/collections">
+              Explore Collections
+            </Link>
           </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function FeaturedCollection({
-  collection,
-}: {
-  collection: FeaturedCollectionFragment;
-}) {
-  if (!collection) return null;
-  const image = collection?.image;
-  return (
-    <section
-      className="featured-section"
-      aria-labelledby="featured-collection-heading"
-    >
-      <div className="featured-grid">
-        {image && (
-          <div className="featured-image-wrap">
-            <Image
-              data={image}
-              sizes="(min-width: 45em) 50vw, 100vw"
-              alt={image.altText || collection.title}
-            />
-          </div>
-        )}
-        <div className="featured-copy">
-          <p className="eyebrow">Featured Collection</p>
-          <h2 id="featured-collection-heading">{collection.title}</h2>
-          <p>
-            Discover our curated selection of clean beauty essentials —
-            formulated with love and made for every skin.
-          </p>
         </div>
       </div>
     </section>
@@ -167,7 +138,10 @@ function ProductGrid({
             <div className="home-products-grid">
               {response
                 ? response.products.nodes.map((product) => (
-                    <HomeProductCard key={product.id} product={product} />
+                    <HomeProductCard
+                      key={product.id}
+                      product={product as HomepageProduct}
+                    />
                   ))
                 : null}
             </div>
@@ -183,11 +157,14 @@ function ProductGrid({
   );
 }
 
-function HomeProductCard({product}: {product: HomepageProductFragment}) {
+function HomeProductCard({product}: {product: HomepageProduct}) {
   const variantUrl = useVariantUrl(product.handle);
   const image = product.featuredImage;
+  const variant = product.selectedOrFirstAvailableVariant;
+  const {open} = useAside();
+
   return (
-    <div className="home-product-card">
+    <article className="home-product-card">
       <Link className="home-product-link" prefetch="intent" to={variantUrl}>
         <div className="home-product-image">
           {image ? (
@@ -210,7 +187,25 @@ function HomeProductCard({product}: {product: HomepageProductFragment}) {
           <Money data={product.priceRange.minVariantPrice} />
         </p>
       </Link>
-    </div>
+      {variant?.availableForSale ? (
+        <AddToCartButton
+          onClick={() => open('cart')}
+          lines={[
+            {
+              merchandiseId: variant.id,
+              quantity: 1,
+              selectedVariant: variant,
+            },
+          ]}
+        >
+          Add to Cart
+        </AddToCartButton>
+      ) : (
+        <Link className="add-to-cart-btn add-to-cart-btn--link" to={variantUrl}>
+          View Product
+        </Link>
+      )}
+    </article>
   );
 }
 
@@ -295,6 +290,34 @@ const FEATURED_PRODUCTS_QUERY = `#graphql
       altText
       width
       height
+    }
+    selectedOrFirstAvailableVariant {
+      id
+      availableForSale
+      price {
+        amount
+        currencyCode
+      }
+      compareAtPrice {
+        amount
+        currencyCode
+      }
+      image {
+        id
+        url
+        altText
+        width
+        height
+      }
+      product {
+        title
+        handle
+      }
+      selectedOptions {
+        name
+        value
+      }
+      title
     }
   }
   query FeaturedProducts($country: CountryCode, $language: LanguageCode)
