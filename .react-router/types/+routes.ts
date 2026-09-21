@@ -14,6 +14,12 @@ type Pages = {
   "/": {
     params: {};
   };
+  "/api/auth/register": {
+    params: {};
+  };
+  "/api/auth/login": {
+    params: {};
+  };
   "/api/newsletter": {
     params: {};
   };
@@ -70,6 +76,11 @@ type Pages = {
     };
   };
   "/:locale?/collections": {
+    params: {
+      "locale"?: string;
+    };
+  };
+  "/:locale?/account/register": {
     params: {
       "locale"?: string;
     };
@@ -202,12 +213,29 @@ type Pages = {
       "*": string;
     };
   };
+  "/graphiql": {
+    params: {};
+  };
+  "/subrequest-profiler": {
+    params: {};
+  };
+  "/.well-known/appspecific/com.chrome.devtools.json": {
+    params: {};
+  };
 };
 
 type RouteFiles = {
   "root.tsx": {
     id: "root";
-    page: "/" | "/api/newsletter" | "/robots.txt" | "/api/contact" | "/:locale?" | "/:locale?/blogs/:blogHandle/:articleHandle" | "/:locale?/sitemap/:type/:page.xml" | "/:locale?/blogs/:blogHandle" | "/:locale?/pages/terms-of-service" | "/:locale?/pages/privacy-policy" | "/:locale?/collections/:handle" | "/:locale?/account/authorize" | "/:locale?/collections" | "/:locale?/policies/:handle" | "/:locale?/products/:handle" | "/:locale?/account/logout" | "/:locale?/collections/all" | "/:locale?/policies" | "/:locale?/account/login" | "/:locale?/discount/:code" | "/:locale?/pages/shipping" | "/:locale?/pages/:handle" | "/:locale?/pages/contact" | "/:locale?/pages/returns" | "/:locale?/sitemap.xml" | "/:locale?/blogs" | "/:locale?/pages/faq" | "/:locale?/account" | "/:locale?/account/orders" | "/:locale?/account/orders/:id" | "/:locale?/account/addresses" | "/:locale?/account/profile" | "/:locale?/account/*" | "/:locale?/search" | "/:locale?/cart" | "/:locale?/cart/:lines" | "/:locale?/*";
+    page: "/" | "/api/auth/register" | "/api/auth/login" | "/api/newsletter" | "/robots.txt" | "/api/contact" | "/:locale?" | "/:locale?/blogs/:blogHandle/:articleHandle" | "/:locale?/sitemap/:type/:page.xml" | "/:locale?/blogs/:blogHandle" | "/:locale?/pages/terms-of-service" | "/:locale?/pages/privacy-policy" | "/:locale?/collections/:handle" | "/:locale?/account/authorize" | "/:locale?/collections" | "/:locale?/account/register" | "/:locale?/policies/:handle" | "/:locale?/products/:handle" | "/:locale?/account/logout" | "/:locale?/collections/all" | "/:locale?/policies" | "/:locale?/account/login" | "/:locale?/discount/:code" | "/:locale?/pages/shipping" | "/:locale?/pages/:handle" | "/:locale?/pages/contact" | "/:locale?/pages/returns" | "/:locale?/sitemap.xml" | "/:locale?/blogs" | "/:locale?/pages/faq" | "/:locale?/account" | "/:locale?/account/orders" | "/:locale?/account/orders/:id" | "/:locale?/account/addresses" | "/:locale?/account/profile" | "/:locale?/account/*" | "/:locale?/search" | "/:locale?/cart" | "/:locale?/cart/:lines" | "/:locale?/*" | "/graphiql" | "/subrequest-profiler" | "/.well-known/appspecific/com.chrome.devtools.json";
+  };
+  "routes/api.auth.register.ts": {
+    id: "routes/api.auth.register";
+    page: "/api/auth/register";
+  };
+  "routes/api.auth.login.ts": {
+    id: "routes/api.auth.login";
+    page: "/api/auth/login";
   };
   "routes/api.newsletter.ts": {
     id: "routes/api.newsletter";
@@ -223,7 +251,7 @@ type RouteFiles = {
   };
   "routes/($locale).tsx": {
     id: "routes/($locale)";
-    page: "/:locale?" | "/:locale?/blogs/:blogHandle/:articleHandle" | "/:locale?/sitemap/:type/:page.xml" | "/:locale?/blogs/:blogHandle" | "/:locale?/pages/terms-of-service" | "/:locale?/pages/privacy-policy" | "/:locale?/collections/:handle" | "/:locale?/account/authorize" | "/:locale?/collections" | "/:locale?/policies/:handle" | "/:locale?/products/:handle" | "/:locale?/account/logout" | "/:locale?/collections/all" | "/:locale?/policies" | "/:locale?/account/login" | "/:locale?/discount/:code" | "/:locale?/pages/shipping" | "/:locale?/pages/:handle" | "/:locale?/pages/contact" | "/:locale?/pages/returns" | "/:locale?/sitemap.xml" | "/:locale?/blogs" | "/:locale?/pages/faq" | "/:locale?/account" | "/:locale?/account/orders" | "/:locale?/account/orders/:id" | "/:locale?/account/addresses" | "/:locale?/account/profile" | "/:locale?/account/*" | "/:locale?/search" | "/:locale?/cart" | "/:locale?/cart/:lines" | "/:locale?/*";
+    page: "/:locale?" | "/:locale?/blogs/:blogHandle/:articleHandle" | "/:locale?/sitemap/:type/:page.xml" | "/:locale?/blogs/:blogHandle" | "/:locale?/pages/terms-of-service" | "/:locale?/pages/privacy-policy" | "/:locale?/collections/:handle" | "/:locale?/account/authorize" | "/:locale?/collections" | "/:locale?/account/register" | "/:locale?/policies/:handle" | "/:locale?/products/:handle" | "/:locale?/account/logout" | "/:locale?/collections/all" | "/:locale?/policies" | "/:locale?/account/login" | "/:locale?/discount/:code" | "/:locale?/pages/shipping" | "/:locale?/pages/:handle" | "/:locale?/pages/contact" | "/:locale?/pages/returns" | "/:locale?/sitemap.xml" | "/:locale?/blogs" | "/:locale?/pages/faq" | "/:locale?/account" | "/:locale?/account/orders" | "/:locale?/account/orders/:id" | "/:locale?/account/addresses" | "/:locale?/account/profile" | "/:locale?/account/*" | "/:locale?/search" | "/:locale?/cart" | "/:locale?/cart/:lines" | "/:locale?/*";
   };
   "routes/($locale).blogs.$blogHandle.$articleHandle.tsx": {
     id: "routes/($locale).blogs.$blogHandle.$articleHandle";
@@ -256,6 +284,10 @@ type RouteFiles = {
   "routes/($locale).collections._index.tsx": {
     id: "routes/($locale).collections._index";
     page: "/:locale?/collections";
+  };
+  "routes/($locale).account_.register.tsx": {
+    id: "routes/($locale).account_.register";
+    page: "/:locale?/account/register";
   };
   "routes/($locale).policies.$handle.tsx": {
     id: "routes/($locale).policies.$handle";
@@ -361,10 +393,32 @@ type RouteFiles = {
     id: "routes/($locale).$";
     page: "/:locale?/*";
   };
+  "../../../../..//Users/Biplove/evol-suhana/node_modules/@shopify/hydrogen/dist/vite/virtual-routes/layout.jsx": {
+    id: "/Users/Biplove/evol-suhana/node_modules/@shopify/hydrogen/dist/vite/virtual-routes/layout";
+    page: "/graphiql" | "/subrequest-profiler" | "/.well-known/appspecific/com.chrome.devtools.json" | "/";
+  };
+  "../../../../..//Users/Biplove/evol-suhana/node_modules/@shopify/hydrogen/dist/vite/virtual-routes/routes/graphiql.jsx": {
+    id: "vite/virtual-routes/routes/graphiql";
+    page: "/graphiql";
+  };
+  "../../../../..//Users/Biplove/evol-suhana/node_modules/@shopify/hydrogen/dist/vite/virtual-routes/routes/subrequest-profiler.jsx": {
+    id: "vite/virtual-routes/routes/subrequest-profiler";
+    page: "/subrequest-profiler";
+  };
+  "../../../../..//Users/Biplove/evol-suhana/node_modules/@shopify/hydrogen/dist/vite/virtual-routes/routes/[.]well-known.appspecific.com[.]chrome[.]devtools[.]json.jsx": {
+    id: "vite/virtual-routes/routes/[.]well-known.appspecific.com[.]chrome[.]devtools[.]json";
+    page: "/.well-known/appspecific/com.chrome.devtools.json";
+  };
+  "../../../../..//Users/Biplove/evol-suhana/node_modules/@shopify/hydrogen/dist/vite/virtual-routes/routes/index.jsx": {
+    id: "vite/virtual-routes/routes/index";
+    page: "/";
+  };
 };
 
 type RouteModules = {
   "root": typeof import("./app/root.tsx");
+  "routes/api.auth.register": typeof import("./app/routes/api.auth.register.ts");
+  "routes/api.auth.login": typeof import("./app/routes/api.auth.login.ts");
   "routes/api.newsletter": typeof import("./app/routes/api.newsletter.ts");
   "routes/[robots.txt]": typeof import("./app/routes/[robots.txt].tsx");
   "routes/api.contact": typeof import("./app/routes/api.contact.ts");
@@ -377,6 +431,7 @@ type RouteModules = {
   "routes/($locale).collections.$handle": typeof import("./app/routes/($locale).collections.$handle.tsx");
   "routes/($locale).account_.authorize": typeof import("./app/routes/($locale).account_.authorize.tsx");
   "routes/($locale).collections._index": typeof import("./app/routes/($locale).collections._index.tsx");
+  "routes/($locale).account_.register": typeof import("./app/routes/($locale).account_.register.tsx");
   "routes/($locale).policies.$handle": typeof import("./app/routes/($locale).policies.$handle.tsx");
   "routes/($locale).products.$handle": typeof import("./app/routes/($locale).products.$handle.tsx");
   "routes/($locale).account_.logout": typeof import("./app/routes/($locale).account_.logout.tsx");
@@ -403,4 +458,9 @@ type RouteModules = {
   "routes/($locale).cart": typeof import("./app/routes/($locale).cart.tsx");
   "routes/($locale).cart.$lines": typeof import("./app/routes/($locale).cart.$lines.tsx");
   "routes/($locale).$": typeof import("./app/routes/($locale).$.tsx");
+  "/Users/Biplove/evol-suhana/node_modules/@shopify/hydrogen/dist/vite/virtual-routes/layout": unknown;
+  "vite/virtual-routes/routes/graphiql": unknown;
+  "vite/virtual-routes/routes/subrequest-profiler": unknown;
+  "vite/virtual-routes/routes/[.]well-known.appspecific.com[.]chrome[.]devtools[.]json": unknown;
+  "vite/virtual-routes/routes/index": unknown;
 };

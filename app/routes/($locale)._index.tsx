@@ -69,8 +69,7 @@ export default function Homepage() {
   return (
     <div className="home">
       {data.isShopLinked ? null : <MockShopNotice />}
-      <Hero collection={data.featuredCollection} />
-      <FeaturedCollection collection={data.featuredCollection} />
+            <Hero collection={data.featuredCollection} />
       <ProductGrid products={data.featuredProducts} />
       <BrandStory />
     </div>
@@ -90,15 +89,14 @@ function Hero({collection}: {collection: FeaturedCollectionFragment}) {
             alt={image.altText || 'Evol Suhana'}
           />
         ) : null}
-        {/* Drop your own banner at public/hero.jpg and it will be used here */}
+        {/* Drop your own banner at public/hero-banner.jpg and it will be used here */}
         <div className="hero-bg hero-bg-photo" aria-hidden="true" />
         <div className="hero-overlay" />
         <div className="hero-content">
-          <p className="hero-eyebrow">Modern Living</p>
-          <h1 id="hero-heading">EVOL</h1>
+          <h1 id="hero-heading">Evol BY Suhana</h1>
           <p className="hero-tagline">
-            Curated lifestyle, wellness & everyday essentials — 
-            thoughtfully chosen for modern living.
+            Curated lifestyle, wellness & everyday essentials — thoughtfully
+            chosen for modern living.
           </p>
           <div className="hero-ctas">
             <Link className="btn btn-primary" to="/collections/all">
@@ -140,12 +138,6 @@ function FeaturedCollection({
             Discover our curated selection of clean beauty essentials —
             formulated with love and made for every skin.
           </p>
-          <Link
-            className="btn btn-dark"
-            to={`/collections/${collection.handle}`}
-          >
-            Shop the Collection
-          </Link>
         </div>
       </div>
     </section>
@@ -235,16 +227,16 @@ function BrandStory() {
             ✦
           </span>
           <h3>Thoughtfully Curated</h3>
-          <p>
-            Every product is carefully selected to enhance your daily life.
-          </p>
+          <p>Every product is carefully selected to enhance your daily life.</p>
         </div>
         <div className="brand-story-item">
           <span className="brand-story-icon" aria-hidden="true">
             ✿
           </span>
           <h3>Conscious Living</h3>
-          <p>Mindful choices for you and the planet. Wellness without compromise.</p>
+          <p>
+            Mindful choices for you and the planet. Wellness without compromise.
+          </p>
         </div>
         <div className="brand-story-item">
           <span className="brand-story-icon" aria-hidden="true">
@@ -252,7 +244,8 @@ function BrandStory() {
           </span>
           <h3>Everyday Essentials</h3>
           <p>
-            Quality products designed to fit seamlessly into your modern lifestyle.
+            Quality products designed to fit seamlessly into your modern
+            lifestyle.
           </p>
         </div>
       </div>

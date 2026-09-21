@@ -77,7 +77,10 @@ export function CartLineItem({
               ))}
             </ul>
           )}
-          <CartLineQuantity line={line} />
+          <div className="cart-line-controls">
+            <CartLineQuantity line={line} />
+            <CartLineRemoveButton lineIds={[id]} disabled={line.isOptimistic ?? false} />
+          </div>
         </div>
       </div>
 
@@ -136,7 +139,6 @@ function CartLineQuantity({line}: {line: CartLine}) {
           <span aria-hidden="true">&#43;</span>
         </button>
       </CartLineUpdateButton>
-      <CartLineRemoveButton lineIds={[lineId]} disabled={!!isOptimistic} />
     </div>
   );
 }

@@ -48,18 +48,27 @@ export function CartMain({layout, cart: originalCart}: CartMainProps) {
   const className = `cart-main ${withDiscount ? 'with-discount' : ''}`;
   const cartHasItems = cart?.totalQuantity ? cart.totalQuantity > 0 : false;
   const childrenMap = getLineItemChildrenMap(cart?.lines?.nodes ?? []);
+  const isAside = layout === 'aside';
 
   return (
     <section
-      className={className}
-      aria-label={layout === 'page' ? 'Cart page' : 'Cart drawer'}
+      className={`${className} ${isAside ? 'h-full flex flex-col' : ''}`}
+      aria-label={isAside ? 'Cart drawer' : 'Cart page'}
     >
       <CartEmpty hidden={linesCount} layout={layout} />
-      <div className="cart-details">
+      <div
+        className={`cart-details ${isAside ? 'flex flex-1 flex-col min-h-0' : ''}`}
+      >
         <p id="cart-lines" className="sr-only">
           Line items
         </p>
-        <div>
+        <div
+          className={
+            isAside
+              ? 'cart-items-scroll flex-1 overflow-y-auto min-h-0'
+              : 'cart-items-scroll'
+          }
+        >
           <ul aria-labelledby="cart-lines">
             {(cart?.lines?.nodes ?? []).map((line) => {
               // we do not render non-parent lines at the root of the cart
@@ -80,7 +89,11 @@ export function CartMain({layout, cart: originalCart}: CartMainProps) {
             })}
           </ul>
         </div>
-        {cartHasItems && <CartSummary cart={cart} layout={layout} />}
+        {cartHasItems && (
+          <div className={isAside ? 'shrink-0' : undefined}>
+            <CartSummary cart={cart} layout={layout} />
+          </div>
+        )}
       </div>
     </section>
   );

@@ -7,6 +7,7 @@ import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
   plugins: [tailwindcss(), hydrogen(), oxygen(), reactRouter()],
+  envDir: false,
   resolve: {
     alias: {
       // Vite's native tsconfig path resolver does not cover JavaScript
@@ -40,6 +41,6 @@ export default defineConfig({
     },
   },
   server: {
-    allowedHosts: ['.tryhydrogen.dev'],
+    allowedHosts: true,
   },
 });
