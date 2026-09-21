@@ -213,21 +213,12 @@ type Pages = {
       "*": string;
     };
   };
-  "/graphiql": {
-    params: {};
-  };
-  "/subrequest-profiler": {
-    params: {};
-  };
-  "/.well-known/appspecific/com.chrome.devtools.json": {
-    params: {};
-  };
 };
 
 type RouteFiles = {
   "root.tsx": {
     id: "root";
-    page: "/" | "/api/auth/register" | "/api/auth/login" | "/api/newsletter" | "/robots.txt" | "/api/contact" | "/:locale?" | "/:locale?/blogs/:blogHandle/:articleHandle" | "/:locale?/sitemap/:type/:page.xml" | "/:locale?/blogs/:blogHandle" | "/:locale?/pages/terms-of-service" | "/:locale?/pages/privacy-policy" | "/:locale?/collections/:handle" | "/:locale?/account/authorize" | "/:locale?/collections" | "/:locale?/account/register" | "/:locale?/policies/:handle" | "/:locale?/products/:handle" | "/:locale?/account/logout" | "/:locale?/collections/all" | "/:locale?/policies" | "/:locale?/account/login" | "/:locale?/discount/:code" | "/:locale?/pages/shipping" | "/:locale?/pages/:handle" | "/:locale?/pages/contact" | "/:locale?/pages/returns" | "/:locale?/sitemap.xml" | "/:locale?/blogs" | "/:locale?/pages/faq" | "/:locale?/account" | "/:locale?/account/orders" | "/:locale?/account/orders/:id" | "/:locale?/account/addresses" | "/:locale?/account/profile" | "/:locale?/account/*" | "/:locale?/search" | "/:locale?/cart" | "/:locale?/cart/:lines" | "/:locale?/*" | "/graphiql" | "/subrequest-profiler" | "/.well-known/appspecific/com.chrome.devtools.json";
+    page: "/" | "/api/auth/register" | "/api/auth/login" | "/api/newsletter" | "/robots.txt" | "/api/contact" | "/:locale?" | "/:locale?/blogs/:blogHandle/:articleHandle" | "/:locale?/sitemap/:type/:page.xml" | "/:locale?/blogs/:blogHandle" | "/:locale?/pages/terms-of-service" | "/:locale?/pages/privacy-policy" | "/:locale?/collections/:handle" | "/:locale?/account/authorize" | "/:locale?/collections" | "/:locale?/account/register" | "/:locale?/policies/:handle" | "/:locale?/products/:handle" | "/:locale?/account/logout" | "/:locale?/collections/all" | "/:locale?/policies" | "/:locale?/account/login" | "/:locale?/discount/:code" | "/:locale?/pages/shipping" | "/:locale?/pages/:handle" | "/:locale?/pages/contact" | "/:locale?/pages/returns" | "/:locale?/sitemap.xml" | "/:locale?/blogs" | "/:locale?/pages/faq" | "/:locale?/account" | "/:locale?/account/orders" | "/:locale?/account/orders/:id" | "/:locale?/account/addresses" | "/:locale?/account/profile" | "/:locale?/account/*" | "/:locale?/search" | "/:locale?/cart" | "/:locale?/cart/:lines" | "/:locale?/*";
   };
   "routes/api.auth.register.ts": {
     id: "routes/api.auth.register";
@@ -393,26 +384,6 @@ type RouteFiles = {
     id: "routes/($locale).$";
     page: "/:locale?/*";
   };
-  "../../../../..//Users/Biplove/evol-suhana/node_modules/@shopify/hydrogen/dist/vite/virtual-routes/layout.jsx": {
-    id: "/Users/Biplove/evol-suhana/node_modules/@shopify/hydrogen/dist/vite/virtual-routes/layout";
-    page: "/graphiql" | "/subrequest-profiler" | "/.well-known/appspecific/com.chrome.devtools.json" | "/";
-  };
-  "../../../../..//Users/Biplove/evol-suhana/node_modules/@shopify/hydrogen/dist/vite/virtual-routes/routes/graphiql.jsx": {
-    id: "vite/virtual-routes/routes/graphiql";
-    page: "/graphiql";
-  };
-  "../../../../..//Users/Biplove/evol-suhana/node_modules/@shopify/hydrogen/dist/vite/virtual-routes/routes/subrequest-profiler.jsx": {
-    id: "vite/virtual-routes/routes/subrequest-profiler";
-    page: "/subrequest-profiler";
-  };
-  "../../../../..//Users/Biplove/evol-suhana/node_modules/@shopify/hydrogen/dist/vite/virtual-routes/routes/[.]well-known.appspecific.com[.]chrome[.]devtools[.]json.jsx": {
-    id: "vite/virtual-routes/routes/[.]well-known.appspecific.com[.]chrome[.]devtools[.]json";
-    page: "/.well-known/appspecific/com.chrome.devtools.json";
-  };
-  "../../../../..//Users/Biplove/evol-suhana/node_modules/@shopify/hydrogen/dist/vite/virtual-routes/routes/index.jsx": {
-    id: "vite/virtual-routes/routes/index";
-    page: "/";
-  };
 };
 
 type RouteModules = {
@@ -458,9 +429,4 @@ type RouteModules = {
   "routes/($locale).cart": typeof import("./app/routes/($locale).cart.tsx");
   "routes/($locale).cart.$lines": typeof import("./app/routes/($locale).cart.$lines.tsx");
   "routes/($locale).$": typeof import("./app/routes/($locale).$.tsx");
-  "/Users/Biplove/evol-suhana/node_modules/@shopify/hydrogen/dist/vite/virtual-routes/layout": unknown;
-  "vite/virtual-routes/routes/graphiql": unknown;
-  "vite/virtual-routes/routes/subrequest-profiler": unknown;
-  "vite/virtual-routes/routes/[.]well-known.appspecific.com[.]chrome[.]devtools[.]json": unknown;
-  "vite/virtual-routes/routes/index": unknown;
 };
